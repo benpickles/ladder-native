@@ -95,14 +95,20 @@ export default class extends React.Component {
   }
 
   selectLoser(player) {
+    let playerId = player.id
+    if (playerId == this.state.loser_id) playerId = null
+
     this.setState({
-      loser_id: player.id,
+      loser_id: playerId,
     })
   }
 
   selectWinner(player) {
+    let playerId = player.id
+    if (playerId == this.state.winner_id) playerId = null
+
     this.setState({
-      winner_id: player.id,
+      winner_id: playerId,
     })
   }
 }
