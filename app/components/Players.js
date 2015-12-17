@@ -7,6 +7,7 @@ const {
 } = React
 
 import Client from '../Client'
+import Loading from './Loading'
 
 export default class extends React.Component {
   constructor() {
@@ -18,6 +19,7 @@ export default class extends React.Component {
 
     this.state = {
       dataSource: this._dataSource.cloneWithRows([]),
+      loading: true,
     }
   }
 
@@ -40,15 +42,19 @@ export default class extends React.Component {
 
       this.setState({
         dataSource: this._dataSource.cloneWithRows(rows),
+        loading: false,
       })
     })
   }
 
   render() {
+    if (this.state.loading) return <Loading />
+
     return (
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
+        style={styles.list}
       />
     )
   }
@@ -65,8 +71,10 @@ export default class extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  list: {
+    marginTop: 20,
+  },
   row: {
-    alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',

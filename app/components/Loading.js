@@ -8,7 +8,7 @@ const {
 export default () => {
   return (
     <View style={style.container}>
-      <ActivityIndicatorIOS />
+      <ActivityIndicatorIOS size="large" />
     </View>
   )
 }
