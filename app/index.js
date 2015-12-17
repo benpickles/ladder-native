@@ -57,6 +57,7 @@ export default class extends React.Component {
       <View>
         <Text>{row.position}</Text>
         <Text>{row.name}</Text>
+        <Text>{row.score}</Text>
       </View>
     )
   }
