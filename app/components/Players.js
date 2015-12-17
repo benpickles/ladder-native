@@ -6,7 +6,7 @@ const {
   View,
 } = React
 
-import Client from '../client'
+import Client from '../Client'
 
 export default class extends React.Component {
   constructor() {
