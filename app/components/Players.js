@@ -24,24 +24,9 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    Client.players().then((body) => {
-      const rows = body.data
-        .map((player) => player.attributes)
-        .sort((a, b) => {
-          return a.score < b.score ? 1 : -1
-        })
-
-      let lastScore = null
-      let position = 0
-
-      rows.forEach((attributes) => {
-        if (lastScore != attributes.score) position++
-        attributes.position = position
-        lastScore = attributes.score
-      })
-
+    Client.playersByPosition().then((players) => {
       this.setState({
-        dataSource: this._dataSource.cloneWithRows(rows),
+        dataSource: this._dataSource.cloneWithRows(players),
         loading: false,
       })
     })

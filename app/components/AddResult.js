@@ -22,18 +22,7 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    Client.players().then((body) => {
-      const players = body.data
-        .map((player) => {
-          return {
-            id: player.id,
-            name: player.attributes.name,
-          }
-        })
-        .sort((a, b) => {
-          return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        })
-
+    Client.playersByName().then((players) => {
       this.setState({
         loading: false,
         players: players,

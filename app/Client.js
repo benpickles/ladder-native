@@ -1,8 +1,8 @@
-const API = 'http://staging-ladder-api.herokuapp.com'
+import Api from './Api'
 
 export default {
   createResult(winnerId, loserId) {
-    const body = JSON.stringify({
+    return Api.createResult({
       data: {
         relationships: {
           loser: {
@@ -18,24 +18,62 @@ export default {
         },
       },
     })
-
-    return fetch(`${API}/results`, {
-      body: body,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'post',
-    })
   },
 
   players() {
-    return fetch(`${API}/players`)
-      .then((response) => response.json())
+    return Api.players().then(function(body) {
+      return body.data.map(function(player) {
+        let attributes = player.attributes
+        attributes.id = player.id
+        return attributes
+      })
+    })
+  },
+
+  playersByName() {
+    return this.players().then(function(players) {
+      return players.sort(function(a, b) {
+        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+      })
+    })
+  },
+
+  playersByPosition() {
+    return this.players().then(function(players) {
+      const sorted = players.sort(function(a, b) {
+        return a.score < b.score ? 1 : -1
+      })
+
+      let lastScore = null
+      let position = 0
+
+      sorted.forEach(function(attributes) {
+        if (lastScore != attributes.score) position++
+        attributes.position = position
+        lastScore = attributes.score
+      })
+
+      return sorted
+    })
   },
 
   results() {
-    return fetch(`${API}/results`)
-      .then((response) => response.json())
-  }
+    return Api.results().then(function(body) {
+      const players = body.included.reduce(function(memo, player) {
+        memo[player.id] = player.attributes
+        return memo
+      }, {})
+
+      return body.data.map(function(result) {
+        const winnerId = result.relationships.winner.data.id
+        const loserId = result.relationships.loser.data.id
+
+        return {
+          loser: players[loserId].name,
+          transfer: result.attributes.transfer,
+          winner: players[winnerId].name,
+        }
+      })
+    })
+  },
 }

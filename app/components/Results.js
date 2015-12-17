@@ -24,26 +24,9 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    Client.results().then((body) => {
-      const players = body.included.reduce((memo, player) => {
-        memo[player.id] = player.attributes
-        return memo
-      }, {})
-
-      const rows = body.data
-        .map((result) => {
-          const winnerId = result.relationships.winner.data.id
-          const loserId = result.relationships.loser.data.id
-
-          return {
-            loser: players[loserId].name,
-            transfer: result.attributes.transfer,
-            winner: players[winnerId].name,
-          }
-        })
-
+    Client.results().then((results) => {
       this.setState({
-        dataSource: this._dataSource.cloneWithRows(rows),
+        dataSource: this._dataSource.cloneWithRows(results),
         loading: false,
       })
     })
