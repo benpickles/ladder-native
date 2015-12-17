@@ -23,8 +23,22 @@ export default class extends React.Component {
 
   componentDidMount() {
     Client.results().then((body) => {
+      const players = body.included.reduce((memo, player) => {
+        memo[player.id] = player.attributes
+        return memo
+      }, {})
+
       const rows = body.data
-        .map((result) => result.attributes)
+        .map((result) => {
+          const winnerId = result.relationships.winner.data.id
+          const loserId = result.relationships.loser.data.id
+
+          return {
+            loser: players[loserId].name,
+            transfer: result.attributes.transfer,
+            winner: players[winnerId].name,
+          }
+        })
 
       this.setState({
         dataSource: this._dataSource.cloneWithRows(rows),
@@ -44,7 +58,9 @@ export default class extends React.Component {
   renderRow(row) {
     return (
       <View style={style.row}>
+        <Text style={style.winner}>{row.winner}</Text>
         <Text style={style.transfer}>{row.transfer}</Text>
+        <Text style={style.loser}>{row.loser}</Text>
       </View>
     )
   }
@@ -52,16 +68,25 @@ export default class extends React.Component {
 
 const style = StyleSheet.create({
   row: {
-    alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     marginLeft: 10,
     marginRight: 10,
   },
+  loser: {
+    flex: 1,
+  },
+  name: {
+    fontSize: 32,
+  },
   transfer: {
     flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    maxWidth: 50,
+    textAlign: 'center',
+  },
+  winner: {
+    flex: 1,
+    textAlign: 'right',
   },
 });
