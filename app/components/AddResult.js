@@ -7,12 +7,14 @@ const {
 } = React
 
 import Client from '../client'
+import Loading from './Loading'
 
 export default class extends React.Component {
   constructor() {
     super()
 
     this.state = {
+      loading: true,
       loser_id: null,
       players: [],
       winner_id: null,
@@ -33,12 +35,15 @@ export default class extends React.Component {
         })
 
       this.setState({
+        loading: false,
         players: players,
       })
     })
   }
 
   render() {
+    if (this.state.loading) return <Loading />
+
     const winners = this.renderWinners()
     const losers = this.renderLosers()
 
@@ -101,6 +106,8 @@ export default class extends React.Component {
     this.setState({
       loser_id: playerId,
     })
+
+    this.submitResult()
   }
 
   selectWinner(player) {
@@ -110,6 +117,29 @@ export default class extends React.Component {
     this.setState({
       winner_id: playerId,
     })
+
+    this.submitResult()
+  }
+
+  submitResult() {
+    const winnerId = this.state.winner_id
+    const loserId = this.state.loser_id
+
+    if (!winnerId || !loserId) return
+    if (winnerId == loserId) return
+
+    this.setState({
+      loading: true,
+    })
+
+    Client.createResult(winnerId, loserId)
+      .then(() => {
+        this.setState({
+          loading: false,
+          loser_id: null,
+          winner_id: null,
+        })
+      })
   }
 }
 
