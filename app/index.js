@@ -5,10 +5,12 @@ const {
 
 import Players from './components/Players'
 import Results from './components/Results'
+import AddResult from './components/AddResult'
 
 const TABS = {
   PLAYERS: 0,
   RESULTS: 1,
+  ADD_RESULT: 2,
 }
 
 export default class extends React.Component {
@@ -36,6 +38,13 @@ export default class extends React.Component {
           title="Results"
         >
           <Results />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          onPress={() => this._selectTab(TABS.ADD_RESULT)}
+          selected={this.state.selectedTab == TABS.ADD_RESULT}
+          title="Add Result"
+        >
+          <AddResult />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
