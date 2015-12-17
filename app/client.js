@@ -1,4 +1,4 @@
-const API = 'http://ladder-api.herokuapp.com'
+const API = 'http://staging-ladder-api.herokuapp.com'
 
 export default {
   players() {
