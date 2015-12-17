@@ -3,14 +3,14 @@ const {
   TabBarIOS,
 } = React
 
+import AddResult from './components/AddResult'
 import Players from './components/Players'
 import Results from './components/Results'
-import AddResult from './components/AddResult'
 
 const TABS = {
+  ADD_RESULT: 2,
   PLAYERS: 0,
   RESULTS: 1,
-  ADD_RESULT: 2,
 }
 
 export default class extends React.Component {
