@@ -1,6 +1,7 @@
 const React = require('react-native')
 const {
   ListView,
+  StyleSheet,
   Text,
   View,
 } = React
@@ -46,6 +47,7 @@ export default class extends React.Component {
   render() {
     return (
       <ListView
+        style={styles.listView}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
       />
@@ -54,11 +56,38 @@ export default class extends React.Component {
 
   renderRow(row) {
     return (
-      <View>
-        <Text>{row.position}</Text>
-        <Text>{row.name}</Text>
-        <Text>{row.score}</Text>
+      <View style={styles.row}>
+        <Text style={styles.position}>{row.position}</Text>
+        <Text style={styles.name}>{row.name}</Text>
+        <Text style={styles.score}>{row.score}</Text>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  listView: {
+    marginTop: 20,
+  },
+  row: {
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  position: {
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  name: {
+    flex: 1,
+    textAlign: 'center',
+  },
+  score: {
+    flex: 1,
+    textAlign: 'right',
+  },
+});
