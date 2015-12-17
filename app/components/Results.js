@@ -43,14 +43,14 @@ export default class extends React.Component {
 
   renderRow(row) {
     return (
-      <View style={styles.row}>
-        <Text style={styles.transfer}>{row.transfer}</Text>
+      <View style={style.row}>
+        <Text style={style.transfer}>{row.transfer}</Text>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   row: {
     alignItems: 'center',
     flex: 1,
