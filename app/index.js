@@ -28,23 +28,26 @@ export default class extends React.Component {
         <TabBarIOS.Item
           onPress={() => this._selectTab(TABS.PLAYERS)}
           selected={this.state.selectedTab == TABS.PLAYERS}
+          icon={require('./icons/rankings.png')}
           title="Players"
         >
           <Players />
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          onPress={() => this._selectTab(TABS.RESULTS)}
-          selected={this.state.selectedTab == TABS.RESULTS}
-          title="Results"
-        >
-          <Results />
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
           onPress={() => this._selectTab(TABS.ADD_RESULT)}
           selected={this.state.selectedTab == TABS.ADD_RESULT}
+          icon={require('./icons/add-result.png')}
           title="Add Result"
         >
           <AddResult />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          onPress={() => this._selectTab(TABS.RESULTS)}
+          selected={this.state.selectedTab == TABS.RESULTS}
+          icon={require('./icons/results.png')}
+          title="Results"
+        >
+          <Results />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
