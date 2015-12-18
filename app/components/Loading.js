@@ -1,4 +1,5 @@
-const React = require('react-native')
+import React from 'react-native'
+
 const {
   ActivityIndicatorIOS,
   StyleSheet,
