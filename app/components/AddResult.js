@@ -3,12 +3,12 @@ import React from 'react-native'
 const {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } = React
 
 import Client from '../Client'
 import Loading from './Loading'
+import PlayersCloud from './PlayersCloud'
 
 export default class extends React.Component {
   constructor() {
@@ -34,78 +34,49 @@ export default class extends React.Component {
   render() {
     if (this.state.loading) return <Loading />
 
-    const winners = this.renderWinners()
-    const losers = this.renderLosers()
-
     return (
       <View style={style.container}>
         <View style={style.playersContainer}>
           <Text style={style.label}>Winner</Text>
           <View style={style.players}>
-            {winners}
+            <PlayersCloud
+              onSelect={(id) => this.selectWinner(id)}
+              players={this.state.players}
+              selected={this.state.winner_id}
+              selectedColor="#00cc00"
+            />
           </View>
         </View>
         <View style={style.playersContainer}>
           <Text style={style.label}>Second</Text>
           <View style={style.players}>
-            {losers}
+            <PlayersCloud
+              onSelect={(id) => this.selectLoser(id)}
+              players={this.state.players}
+              selected={this.state.loser_id}
+              selectedColor="#cc0000"
+            />
           </View>
         </View>
       </View>
     )
   }
 
-  renderLosers() {
-    return this.state.players.map((player) => {
-      const selectedStyle = player.id == this.state.loser_id
-        ? style.selectedLoser
-        : null
-
-      return this.renderPlayer(player, selectedStyle, this.selectLoser.bind(this))
-    })
-  }
-
-  renderPlayer(player, selectedStyle, callback) {
-    let styles = [style.player, selectedStyle]
-
-    return (
-      <TouchableOpacity
-        key={player.id}
-        onPress={() => callback(player)}
-        style={styles}
-      >
-        <Text style={style.name}>{player.name}</Text>
-      </TouchableOpacity>
-    )
-  }
-
-  renderWinners() {
-    return this.state.players.map((player) => {
-      const selectedStyle = player.id == this.state.winner_id
-        ? style.selectedWinner
-        : null
-
-      return this.renderPlayer(player, selectedStyle, this.selectWinner.bind(this))
-    })
-  }
-
-  selectLoser(player) {
-    let playerId = player.id
-    if (playerId == this.state.loser_id) playerId = null
+  selectLoser(id) {
+    if (id == this.state.loser_id) id = null
 
     this.setState({
-      loser_id: playerId,
+      loser_id: id,
     })
 
     this.submitResult()
   }
 
-  selectWinner(player) {
-    let playerId = player.id
-    if (playerId == this.state.winner_id) playerId = null
+  selectWinner(id) {
+    if (id == this.state.winner_id) id = null
 
     this.setState({
-      winner_id: playerId,
+      winner_id: id,
     })
 
     this.submitResult()
@@ -143,18 +114,6 @@ const style = StyleSheet.create({
     fontSize: 32,
     textAlign: 'center',
   },
-  name: {
-    fontSize: 32,
-  },
-  player: {
-    backgroundColor: '#dddddd',
-    borderRadius: 30,
-    margin: 10,
-    paddingBottom: 15,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 15,
-  },
   players: {
     alignItems: 'center',
     flex: 1,
@@ -165,11 +124,5 @@ const style = StyleSheet.create({
   },
   playersContainer: {
     paddingTop: 30,
-  },
-  selectedLoser: {
-    backgroundColor: '#cc0000',
-  },
-  selectedWinner: {
-    backgroundColor: '#00cc00',
   },
 })
