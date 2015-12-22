@@ -13,7 +13,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const players = this.props.players.map((player) => {
+    const players = this.props.players.toJS().map((player) => {
       return this.renderPlayer(player)
     })
 
