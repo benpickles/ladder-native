@@ -30,33 +30,6 @@ export default {
     })
   },
 
-  playersByName() {
-    return this.players().then(function(players) {
-      return players.sort(function(a, b) {
-        return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-      })
-    })
-  },
-
-  playersByPosition() {
-    return this.players().then(function(players) {
-      const sorted = players.sort(function(a, b) {
-        return a.score < b.score ? 1 : -1
-      })
-
-      let lastScore = null
-      let position = 0
-
-      sorted.forEach(function(attributes) {
-        if (lastScore != attributes.score) position++
-        attributes.position = position
-        lastScore = attributes.score
-      })
-
-      return sorted
-    })
-  },
-
   results() {
     return Api.results().then(function(body) {
       const players = body.included.reduce(function(memo, player) {

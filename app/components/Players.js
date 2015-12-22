@@ -7,8 +7,8 @@ const {
   View,
 } = React
 
-import Client from '../Client'
 import Loading from './Loading'
+import PlayersActions from '../actions/PlayersActions'
 
 export default class extends React.Component {
   constructor() {
@@ -17,28 +17,26 @@ export default class extends React.Component {
     this._dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-
-    this.state = {
-      dataSource: this._dataSource.cloneWithRows([]),
-      loading: true,
-    }
   }
 
   componentDidMount() {
-    Client.playersByPosition().then((players) => {
-      this.setState({
-        dataSource: this._dataSource.cloneWithRows(players),
-        loading: false,
-      })
-    })
+    PlayersActions.fetch()
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !nextProps.players.equals(this.props.players)
   }
 
   render() {
-    if (this.state.loading) return <Loading />
+    const { players } = this.props
+
+    if (players.isEmpty()) return <Loading />
+
+    const dataSource = this._dataSource.cloneWithRows(players.toJS())
 
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={dataSource}
         renderRow={this.renderRow}
         style={styles.list}
       />

@@ -7,8 +7,8 @@ const {
   View,
 } = React
 
-import Client from '../Client'
 import Loading from './Loading'
+import ResultsActions from '../actions/ResultsActions'
 
 export default class extends React.Component {
   constructor() {
@@ -17,28 +17,22 @@ export default class extends React.Component {
     this._dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-
-    this.state = {
-      dataSource: this._dataSource.cloneWithRows([]),
-      loading: true,
-    }
   }
 
   componentDidMount() {
-    Client.results().then((results) => {
-      this.setState({
-        dataSource: this._dataSource.cloneWithRows(results),
-        loading: false,
-      })
-    })
+    ResultsActions.fetch()
   }
 
   render() {
-    if (this.state.loading) return <Loading />
+    const { results } = this.props
+
+    if (results.isEmpty()) return <Loading />
+
+    const dataSource = this._dataSource.cloneWithRows(results.toJS())
 
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={dataSource}
         renderRow={this.renderRow}
         style={style.list}
       />
