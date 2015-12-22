@@ -3,6 +3,7 @@ import React from 'react-native'
 const {
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } = React
 
@@ -58,6 +59,11 @@ export default class extends React.Component {
             />
           </View>
         </View>
+        <View style={style.buttonRow}>
+          <TouchableOpacity onPress={() => this.submitResult()} style={style.buttonContainer}>
+            <Text style={style.buttonText}>Add Result</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -68,8 +74,6 @@ export default class extends React.Component {
     this.setState({
       loser_id: id,
     })
-
-    this.submitResult()
   }
 
   selectWinner(id) {
@@ -78,8 +82,6 @@ export default class extends React.Component {
     this.setState({
       winner_id: id,
     })
-
-    this.submitResult()
   }
 
   submitResult() {
@@ -105,6 +107,23 @@ export default class extends React.Component {
 }
 
 const style = StyleSheet.create({
+  buttonContainer: {
+    backgroundColor: '#1990B8',
+    borderRadius: 30,
+    marginTop: 40,
+    paddingBottom: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 15,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 32,
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
