@@ -7,6 +7,8 @@ export default new Blob({
 
   players: [],
 
+  results: [],
+
   addResultSubmitting: false,
   loserId: null,
   winnerId: null,

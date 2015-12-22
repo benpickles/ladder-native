@@ -9,6 +9,7 @@ import AddResultStore from './stores/AddResultStore'
 import Players from './components/Players'
 import PlayersStore from './stores/PlayersStore'
 import Results from './components/Results'
+import ResultsStore from './stores/ResultsStore'
 import State from './State'
 import TabActions from './actions/TabActions'
 import TabStore from './stores/TabStore'
@@ -54,7 +55,7 @@ export default class extends React.Component {
           selected={TabStore.isSelected(RESULTS)}
           title="Results"
         >
-          <Results />
+          <Results results={ResultsStore.results()} />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
