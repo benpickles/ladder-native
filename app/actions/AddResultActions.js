@@ -1,5 +1,8 @@
 import Client from '../Client'
 import Dispatcher from '../Dispatcher'
+import PlayersActions from './PlayersActions'
+import ResultsActions from './ResultsActions'
+import TabActions from './TabActions'
 
 import {
   SET_LOSER,
@@ -7,6 +10,8 @@ import {
   SUBMITTED_RESULT,
   SUBMITTING_RESULT,
 } from '../constants/AddResultConstants'
+
+import { PLAYERS } from '../constants/TabConstants'
 
 export default {
   setLoser(id) {
@@ -32,6 +37,10 @@ export default {
       Dispatcher.dispatch({
         type: SUBMITTED_RESULT,
       })
+
+      PlayersActions.fetch()
+      ResultsActions.fetch()
+      TabActions.select(PLAYERS)
     })
   },
 }
