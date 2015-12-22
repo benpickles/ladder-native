@@ -7,56 +7,49 @@ const {
 import AddResult from './components/AddResult'
 import Players from './components/Players'
 import Results from './components/Results'
+import State from './State'
+import TabActions from './actions/TabActions'
+import TabStore from './stores/TabStore'
 
-const TABS = {
-  ADD_RESULT: 2,
-  PLAYERS: 0,
-  RESULTS: 1,
-}
+import {
+  ADD_RESULT,
+  PLAYERS,
+  RESULTS
+} from './constants/TabConstants'
 
 export default class extends React.Component {
-  constructor() {
-    super()
-
-    this.state = {
-      selectedTab: TABS.PLAYERS,
-    }
+  componentDidMount() {
+    State.onCommit(() => this.forceUpdate())
   }
 
   render() {
     return (
       <TabBarIOS>
         <TabBarIOS.Item
-          onPress={() => this._selectTab(TABS.PLAYERS)}
-          selected={this.state.selectedTab == TABS.PLAYERS}
           icon={require('./icons/rankings.png')}
+          onPress={() => TabActions.select(PLAYERS)}
+          selected={TabStore.isSelected(PLAYERS)}
           title="Players"
         >
           <Players />
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          onPress={() => this._selectTab(TABS.ADD_RESULT)}
-          selected={this.state.selectedTab == TABS.ADD_RESULT}
           icon={require('./icons/add-result.png')}
+          onPress={() => TabActions.select(ADD_RESULT)}
+          selected={TabStore.isSelected(ADD_RESULT)}
           title="Add Result"
         >
           <AddResult />
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          onPress={() => this._selectTab(TABS.RESULTS)}
-          selected={this.state.selectedTab == TABS.RESULTS}
           icon={require('./icons/results.png')}
+          onPress={() => TabActions.select(RESULTS)}
+          selected={TabStore.isSelected(RESULTS)}
           title="Results"
         >
           <Results />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
-  }
-
-  _selectTab(tab) {
-    this.setState({
-      selectedTab: tab,
-    })
   }
 }
