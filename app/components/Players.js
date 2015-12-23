@@ -38,23 +38,23 @@ export default class extends React.Component {
       <ListView
         dataSource={dataSource}
         renderRow={this.renderRow}
-        style={styles.list}
+        style={style.list}
       />
     )
   }
 
   renderRow(row) {
     return (
-      <View style={styles.row}>
-        <Text style={styles.position}>{row.position}</Text>
-        <Text style={styles.name}>{row.name}</Text>
-        <Text style={styles.score}>{row.score}</Text>
+      <View style={style.row}>
+        <Text style={style.position}>{row.position}</Text>
+        <Text style={style.name}>{row.name}</Text>
+        <Text style={style.score}>{row.score}</Text>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   list: {
     marginTop: 20,
   },
