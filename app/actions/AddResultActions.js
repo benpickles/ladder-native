@@ -40,7 +40,6 @@ export default {
 
       PlayersActions.fetch()
       ResultsActions.fetch()
-      TabActions.select(PLAYERS)
     })
   },
 }
