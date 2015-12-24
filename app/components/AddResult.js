@@ -1,6 +1,7 @@
 import React from 'react-native'
 
 const {
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -45,7 +46,10 @@ export default class extends React.Component {
     if (submitting) return <Loading />
 
     return (
-      <View style={style.container}>
+      <ScrollView
+        automaticallyAdjustContentInsets={false}
+        style={style.container}
+        >
         <View style={style.playersContainer}>
           <Text style={style.label}>Winner</Text>
           <View style={style.players}>
@@ -73,7 +77,7 @@ export default class extends React.Component {
             <Text style={style.buttonText}>Add Result</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -91,6 +95,7 @@ const style = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginBottom: 70,
   },
   buttonText: {
     color: '#ffffff',
@@ -99,7 +104,6 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: 20,
   },
   label: {
     fontSize: 32,
