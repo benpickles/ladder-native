@@ -1,23 +1,12 @@
 import Dispatcher from '../Dispatcher'
+import Ranker from '../lib/Ranker'
 import State from '../State'
 
 import { LOAD_PLAYERS } from '../constants/PlayersConstants'
 
 export default {
   players() {
-    const players = State.get('players').sort(function(a, b) {
-      return a.get('score') < b.get('score') ? 1 : -1
-    })
-
-    let lastScore = null
-    let position = 0
-
-    return players.map(function(attributes) {
-      const score = attributes.get('score')
-      if (lastScore != score) position++
-      lastScore = score
-      return attributes.set('position', position)
-    })
+    return Ranker(State.get('players'))
   },
 }
 
