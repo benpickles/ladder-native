@@ -46,7 +46,7 @@ export default class extends React.Component {
   renderRow(row) {
     return (
       <View style={style.row}>
-        <Text style={style.position}>{row.position}</Text>
+        <Text style={style.rank}>{row.rank}</Text>
         <Text style={style.name}>{row.name}</Text>
         <Text style={style.score}>{row.score}</Text>
       </View>
@@ -58,6 +58,12 @@ const style = StyleSheet.create({
   list: {
     marginTop: 20,
   },
+  rank: {
+    flex: 1,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    fontSize: 25,
+  },
   row: {
     flex: 1,
     flexDirection: 'row',
@@ -68,12 +74,6 @@ const style = StyleSheet.create({
     paddingRight: 25,
     borderTopWidth: 1,
     borderTopColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  position: {
-    flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    fontSize: 25,
   },
   name: {
     flex: 1,
