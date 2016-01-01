@@ -1,6 +1,7 @@
 import React from 'react-native'
 
 const {
+  LayoutAnimation,
   ScrollView,
   Text,
 } = React
@@ -15,6 +16,8 @@ export default class extends React.Component {
 
   render() {
     if (this.props.players.isEmpty()) return <Loading />
+
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
 
     const players = this.props.players.map(function(player) {
       return <PlayersItem key={player.get('id')} player={player} />
