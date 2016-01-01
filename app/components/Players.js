@@ -1,24 +1,16 @@
 import React from 'react-native'
 
 const {
-  ListView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
 } = React
 
 import Loading from './Loading'
 import PlayersActions from '../actions/PlayersActions'
+import PlayersItem from './PlayersItem'
 
 export default class extends React.Component {
-  constructor() {
-    super()
-
-    this._dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-  }
-
   componentDidMount() {
     PlayersActions.fetch()
   }
@@ -28,62 +20,22 @@ export default class extends React.Component {
   }
 
   render() {
-    const { players } = this.props
+    if (this.props.players.isEmpty()) return <Loading />
 
-    if (players.isEmpty()) return <Loading />
-
-    const dataSource = this._dataSource.cloneWithRows(players.toJS())
+    const players = this.props.players.map(function(player) {
+      return <PlayersItem key={player.get('id')} player={player} />
+    })
 
     return (
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        style={style.list}
-      />
-    )
-  }
-
-  renderRow(row) {
-    return (
-      <View style={style.row}>
-        <Text style={style.rank}>{row.rank}</Text>
-        <Text style={style.name}>{row.name}</Text>
-        <Text style={style.score}>{row.score}</Text>
-      </View>
+      <ScrollView style={style.list}>
+        {players}
+      </ScrollView>
     )
   }
 }
 
 const style = StyleSheet.create({
   list: {
-    marginTop: 20,
+    paddingTop: 20,
   },
-  rank: {
-    flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    fontSize: 25,
-  },
-  row: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 25,
-    paddingRight: 25,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  name: {
-    flex: 1,
-    textAlign: 'left',
-    fontSize: 25,
-  },
-  score: {
-    flex: 1,
-    textAlign: 'right',
-    fontSize: 15,
-    paddingTop: 5,
-  },
-});
+})
