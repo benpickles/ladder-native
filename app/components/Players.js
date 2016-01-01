@@ -2,7 +2,6 @@ import React from 'react-native'
 
 const {
   ScrollView,
-  StyleSheet,
   Text,
 } = React
 
@@ -22,15 +21,9 @@ export default class extends React.Component {
     })
 
     return (
-      <ScrollView style={style.list}>
+      <ScrollView>
         {players}
       </ScrollView>
     )
   }
 }
-
-const style = StyleSheet.create({
-  list: {
-    paddingTop: 20,
-  },
-})

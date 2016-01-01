@@ -29,7 +29,6 @@ export default class extends React.Component {
       <ListView
         dataSource={dataSource}
         renderRow={this.renderRow}
-        style={style.list}
       />
     )
   }
@@ -46,9 +45,6 @@ export default class extends React.Component {
 }
 
 const style = StyleSheet.create({
-  list: {
-    marginTop: 20,
-  },
   row: {
     flex: 1,
     flexDirection: 'row',

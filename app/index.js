@@ -1,11 +1,15 @@
 import React from 'react-native'
 
 const {
+  StyleSheet,
   TabBarIOS,
+  View,
 } = React
 
 import AddResult from './components/AddResult'
 import AddResultStore from './stores/AddResultStore'
+import Header from './components/Header'
+import LatestResultStore from './stores/LatestResultStore'
 import Players from './components/Players'
 import PlayersActions from './actions/PlayersActions'
 import PlayersStore from './stores/PlayersStore'
@@ -31,6 +35,18 @@ export default class extends React.Component {
   }
 
   render() {
+    return (
+      <View style={style.container}>
+        <Header
+          loading={LatestResultStore.loading()}
+          result={LatestResultStore.result()}
+        />
+        {this.renderTabs()}
+      </View>
+    )
+  }
+
+  renderTabs() {
     return (
       <TabBarIOS>
         <TabBarIOS.Item
@@ -66,3 +82,9 @@ export default class extends React.Component {
     )
   }
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})
