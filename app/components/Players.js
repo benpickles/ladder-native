@@ -7,14 +7,9 @@ const {
 } = React
 
 import Loading from './Loading'
-import PlayersActions from '../actions/PlayersActions'
 import PlayersItem from './PlayersItem'
 
 export default class extends React.Component {
-  componentDidMount() {
-    PlayersActions.fetch()
-  }
-
   shouldComponentUpdate(nextProps) {
     return !nextProps.players.equals(this.props.players)
   }

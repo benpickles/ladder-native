@@ -11,14 +11,9 @@ const {
 import AddResultActions from '../actions/AddResultActions'
 import Client from '../Client'
 import Loading from './Loading'
-import PlayersActions from '../actions/PlayersActions'
 import PlayersCloud from './PlayersCloud'
 
 export default class extends React.Component {
-  componentDidMount() {
-    PlayersActions.fetch()
-  }
-
   handleLoser(id) {
     AddResultActions.setLoser(id)
   }

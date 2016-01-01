@@ -7,8 +7,10 @@ const {
 import AddResult from './components/AddResult'
 import AddResultStore from './stores/AddResultStore'
 import Players from './components/Players'
+import PlayersActions from './actions/PlayersActions'
 import PlayersStore from './stores/PlayersStore'
 import Results from './components/Results'
+import ResultsActions from './actions/ResultsActions'
 import ResultsStore from './stores/ResultsStore'
 import State from './State'
 import TabActions from './actions/TabActions'
@@ -23,6 +25,9 @@ import {
 export default class extends React.Component {
   componentDidMount() {
     State.onCommit(() => this.forceUpdate())
+
+    PlayersActions.fetch()
+    ResultsActions.fetch()
   }
 
   render() {

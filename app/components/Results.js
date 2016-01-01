@@ -8,7 +8,6 @@ const {
 } = React
 
 import Loading from './Loading'
-import ResultsActions from '../actions/ResultsActions'
 
 export default class extends React.Component {
   constructor() {
@@ -17,10 +16,6 @@ export default class extends React.Component {
     this._dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-  }
-
-  componentDidMount() {
-    ResultsActions.fetch()
   }
 
   render() {
