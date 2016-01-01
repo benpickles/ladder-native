@@ -8,6 +8,6 @@
   "dependencies": {
     "flux": "^2.1.1",
     "immutable": "^3.7.6",
-    "react-native": "^0.16.0"
+    "react-native": "^0.17.0"
   }
 }
