@@ -6,6 +6,7 @@ export default new Blob({
   selectedTab: PLAYERS,
 
   players: [],
+  playersLastRank: {},
 
   results: [],
 

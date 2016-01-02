@@ -13,10 +13,30 @@ export default class extends React.Component {
 
   render() {
     const player = this.props.player
+    const lastRank = player.get('lastRank')
+    const rank = player.get('rank')
+    const diff = lastRank - rank
+
+    let changeColour = null
+    let changeText = null
+
+    if (diff < 0) {
+      changeColour = '#ff0000'
+      changeText = diff
+    } else if (diff > 0) {
+      changeColour = '#00ff00'
+      changeText = `+${diff}`
+    }
+
+    const changeStyle = [
+      style.change,
+      { color: changeColour },
+    ]
 
     return (
       <View style={style.row}>
-        <Text style={style.rank}>{player.get('rank')}</Text>
+        <Text style={changeStyle}>{changeText}</Text>
+        <Text style={style.rank}>{rank}</Text>
         <Text style={style.name}>{player.get('name')}</Text>
         <Text style={style.score}>{player.get('score')}</Text>
       </View>
@@ -25,16 +45,23 @@ export default class extends React.Component {
 }
 
 const style = StyleSheet.create({
+  change: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    width: 40,
+  },
   name: {
     flex: 1,
     fontSize: 25,
     textAlign: 'left',
   },
   rank: {
-    flex: 1,
     fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'left',
+    marginRight: 15,
+    textAlign: 'right',
+    width: 40,
   },
   row: {
     borderTopColor: 'rgba(0, 0, 0, 0.1)',
@@ -43,7 +70,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingBottom: 15,
-    paddingLeft: 25,
     paddingRight: 25,
     paddingTop: 15,
   },
