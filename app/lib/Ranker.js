@@ -4,10 +4,10 @@ export default function(players) {
 
   return players
     .sort(function(a, b) {
-      return a.get('score') < b.get('score') ? 1 : -1
+      return a.score < b.score ? 1 : -1
     })
     .map(function(attributes, index) {
-      const score = attributes.get('score')
+      const score = attributes.score
       let rank
 
       if (score == lastScore) {
@@ -17,8 +17,10 @@ export default function(players) {
         lastRank = rank
       }
 
+      attributes.rank = rank + 1
+
       lastScore = score
 
-      return attributes.set('rank', rank + 1)
+      return attributes
     })
 }
