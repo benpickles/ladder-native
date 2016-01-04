@@ -1,6 +1,7 @@
 import React from 'react-native'
 
 const {
+  PixelRatio,
   StyleSheet,
   Text,
   View,
@@ -39,9 +40,11 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
   container: {
-    backgroundColor: '#eeeeee',
-    height: 100,
-    paddingTop: 20,
+    backgroundColor: '#f7f7f7',
+    borderBottomColor: '#b2b2b2',
+    borderBottomWidth: 1 / PixelRatio.get(),
+    height: 98,
+    paddingTop: 19,
   },
   loser: {
     textAlign: 'left',

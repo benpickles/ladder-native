@@ -1,6 +1,7 @@
 import React from 'react-native'
 
 const {
+  PixelRatio,
   StyleSheet,
   Text,
   View,
@@ -64,8 +65,8 @@ const style = StyleSheet.create({
     width: 40,
   },
   row: {
-    borderTopColor: 'rgba(0, 0, 0, 0.1)',
-    borderTopWidth: 1,
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    borderBottomWidth: 1 / PixelRatio.get(),
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
