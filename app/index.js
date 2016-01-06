@@ -30,8 +30,10 @@ export default class extends React.Component {
   componentDidMount() {
     State.onCommit(() => this.forceUpdate())
 
-    PlayersActions.fetch()
-    ResultsActions.fetch()
+    setTimeout(function() {
+      PlayersActions.fetch()
+      ResultsActions.fetch()
+    }, 0)
   }
 
   render() {
