@@ -1,7 +1,7 @@
 import Dispatcher from '../Dispatcher'
 import Client from '../Client'
 
-import { LOAD_PLAYERS } from '../constants/PlayersConstants'
+import { LOADED_PLAYERS } from '../constants/PlayersConstants'
 
 let FETCHING = false
 
@@ -15,7 +15,7 @@ export default {
       FETCHING = false
 
       Dispatcher.dispatch({
-        type: LOAD_PLAYERS,
+        type: LOADED_PLAYERS,
         players: players,
       })
     })

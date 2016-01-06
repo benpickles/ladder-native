@@ -1,1 +1,1 @@
-export const LOAD_PLAYERS = 'LOAD_PLAYERS'
+export const LOADED_PLAYERS = 'LOADED_PLAYERS'

@@ -2,7 +2,7 @@ import Dispatcher from '../Dispatcher'
 import Ranker from '../lib/Ranker'
 import State from '../State'
 
-import { LOAD_PLAYERS } from '../constants/PlayersConstants'
+import { LOADED_PLAYERS } from '../constants/PlayersConstants'
 
 export default {
   players() {
@@ -12,7 +12,7 @@ export default {
 
 Dispatcher.register(function(payload) {
   switch(payload.type) {
-    case LOAD_PLAYERS:
+    case LOADED_PLAYERS:
       const lastRanks = State.get('playersLastRank')
 
       let players = Ranker(payload.players)
