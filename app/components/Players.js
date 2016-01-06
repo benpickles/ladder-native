@@ -3,7 +3,6 @@ import React from 'react-native'
 const {
   LayoutAnimation,
   ScrollView,
-  Text,
 } = React
 
 import Loading from './Loading'
