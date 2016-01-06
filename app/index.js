@@ -57,7 +57,10 @@ export default class extends React.Component {
           selected={TabStore.isSelected(PLAYERS)}
           title="Players"
         >
-          <Players players={PlayersStore.players()} />
+          <Players
+            loading={PlayersStore.loading()}
+            players={PlayersStore.players()}
+          />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           icon={require('./icons/add-result.png')}

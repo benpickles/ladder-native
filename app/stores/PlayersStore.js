@@ -2,9 +2,16 @@ import Dispatcher from '../Dispatcher'
 import Ranker from '../lib/Ranker'
 import State from '../State'
 
-import { LOADED_PLAYERS } from '../constants/PlayersConstants'
+import {
+  LOADED_PLAYERS,
+  LOADING_PLAYERS,
+} from '../constants/PlayersConstants'
 
 export default {
+  loading() {
+    return State.get('playersLoading')
+  },
+
   players() {
     return State.get('players')
   },
@@ -29,7 +36,15 @@ Dispatcher.register(function(payload) {
       State.merge({
         players: players,
         playersLastRank: newRanks,
+        playersLoading: false,
       }).commit()
+
+      break
+
+    case LOADING_PLAYERS:
+      State
+        .set('playersLoading', true)
+        .commit()
 
       break
   }

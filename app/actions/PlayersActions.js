@@ -1,19 +1,21 @@
 import Dispatcher from '../Dispatcher'
 import Client from '../Client'
+import PlayersStore from '../stores/PlayersStore'
 
-import { LOADED_PLAYERS } from '../constants/PlayersConstants'
-
-let FETCHING = false
+import {
+  LOADED_PLAYERS,
+  LOADING_PLAYERS,
+} from '../constants/PlayersConstants'
 
 export default {
   fetch() {
-    if (FETCHING) return
+    if (PlayersStore.loading()) return
 
-    FETCHING = true
+    Dispatcher.dispatch({
+      type: LOADING_PLAYERS,
+    })
 
-    Client.players().then(function(players) {
-      FETCHING = false
-
+    return Client.players().then(function(players) {
       Dispatcher.dispatch({
         type: LOADED_PLAYERS,
         players: players,
