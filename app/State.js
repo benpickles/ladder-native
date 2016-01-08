@@ -10,6 +10,7 @@ export default new Blob({
   playersLoading: false,
 
   results: [],
+  resultsLoading: false,
 
   addResultSubmitting: false,
   loserId: null,

@@ -1,19 +1,21 @@
 import Client from '../Client'
 import Dispatcher from '../Dispatcher'
+import ResultsStore from '../stores/ResultsStore'
 
-import { LOADED_RESULTS } from '../constants/ResultsConstants'
-
-let FETCHING = false
+import {
+  LOADED_RESULTS,
+  LOADING_RESULTS,
+} from '../constants/ResultsConstants'
 
 export default {
   fetch() {
-    if (FETCHING) return
+    if (ResultsStore.loading()) return
 
-    FETCHING = true
+    Dispatcher.dispatch({
+      type: LOADING_RESULTS,
+    })
 
     Client.results().then(function(results) {
-      FETCHING = false
-
       Dispatcher.dispatch({
         type: LOADED_RESULTS,
         results: results,

@@ -2,11 +2,13 @@ import React from 'react-native'
 
 const {
   ListView,
+  RefreshControl,
   StyleSheet,
   Text,
   View,
 } = React
 
+import ApiActions from '../actions/ApiActions'
 import Loading from './Loading'
 
 export default class extends React.Component {
@@ -16,6 +18,10 @@ export default class extends React.Component {
     this._dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
+  }
+
+  handleRefresh() {
+    ApiActions.fetch()
   }
 
   render() {
@@ -28,6 +34,12 @@ export default class extends React.Component {
     return (
       <ListView
         dataSource={dataSource}
+        refreshControl={
+          <RefreshControl
+            onRefresh={this.handleRefresh}
+            refreshing={this.props.loading}
+          />
+        }
         renderRow={this.renderRow}
       />
     )

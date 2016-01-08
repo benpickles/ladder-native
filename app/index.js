@@ -79,7 +79,10 @@ export default class extends React.Component {
           selected={TabStore.isSelected(RESULTS)}
           title="Results"
         >
-          <Results results={ResultsStore.results()} />
+          <Results
+            loading={ResultsStore.loading()}
+            results={ResultsStore.results()}
+          />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
