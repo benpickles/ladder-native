@@ -5,6 +5,7 @@ const {
   ScrollView,
 } = React
 
+import Loading from './Loading'
 import PlayersActions from '../actions/PlayersActions'
 import PlayersList from './PlayersList'
 
@@ -14,6 +15,8 @@ export default class extends React.Component {
   }
 
   render() {
+    if (this.props.players.isEmpty()) return <Loading />
+
     return (
       <ScrollView
         refreshControl={
