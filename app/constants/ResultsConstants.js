@@ -1,1 +1,1 @@
-export const LOAD_RESULTS = 'LOAD_RESULTS'
+export const LOADED_RESULTS = 'LOADED_RESULTS'

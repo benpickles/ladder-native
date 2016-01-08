@@ -1,7 +1,7 @@
 import Dispatcher from '../Dispatcher'
 import State from '../State'
 
-import { LOAD_RESULTS } from '../constants/ResultsConstants'
+import { LOADED_RESULTS } from '../constants/ResultsConstants'
 
 export default {
   results() {
@@ -11,7 +11,7 @@ export default {
 
 Dispatcher.register(function(payload) {
   switch(payload.type) {
-    case LOAD_RESULTS:
+    case LOADED_RESULTS:
       State.merge({
         results: payload.results,
       }).commit()

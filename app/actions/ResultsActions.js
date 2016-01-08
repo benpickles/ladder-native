@@ -1,7 +1,7 @@
 import Client from '../Client'
 import Dispatcher from '../Dispatcher'
 
-import { LOAD_RESULTS } from '../constants/ResultsConstants'
+import { LOADED_RESULTS } from '../constants/ResultsConstants'
 
 let FETCHING = false
 
@@ -15,7 +15,7 @@ export default {
       FETCHING = false
 
       Dispatcher.dispatch({
-        type: LOAD_RESULTS,
+        type: LOADED_RESULTS,
         results: results,
       })
     })
