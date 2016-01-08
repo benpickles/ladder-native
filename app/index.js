@@ -8,13 +8,12 @@ const {
 
 import AddResult from './components/AddResult'
 import AddResultStore from './stores/AddResultStore'
+import ApiActions from './actions/ApiActions'
 import Header from './components/Header'
 import LatestResultStore from './stores/LatestResultStore'
 import Players from './components/Players'
-import PlayersActions from './actions/PlayersActions'
 import PlayersStore from './stores/PlayersStore'
 import Results from './components/Results'
-import ResultsActions from './actions/ResultsActions'
 import ResultsStore from './stores/ResultsStore'
 import State from './State'
 import TabActions from './actions/TabActions'
@@ -31,8 +30,7 @@ export default class extends React.Component {
     State.onCommit(() => this.forceUpdate())
 
     setTimeout(function() {
-      PlayersActions.fetch()
-      ResultsActions.fetch()
+      ApiActions.fetch()
     }, 0)
   }
 

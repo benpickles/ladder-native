@@ -1,7 +1,6 @@
+import ApiActions from './ApiActions'
 import Client from '../Client'
 import Dispatcher from '../Dispatcher'
-import PlayersActions from './PlayersActions'
-import ResultsActions from './ResultsActions'
 import TabActions from './TabActions'
 
 import {
@@ -38,8 +37,7 @@ export default {
         type: SUBMITTED_RESULT,
       })
 
-      PlayersActions.fetch()
-      ResultsActions.fetch()
+      ApiActions.fetch()
     })
   },
 }

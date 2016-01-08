@@ -5,13 +5,13 @@ const {
   ScrollView,
 } = React
 
+import ApiActions from '../actions/ApiActions'
 import Loading from './Loading'
-import PlayersActions from '../actions/PlayersActions'
 import PlayersList from './PlayersList'
 
 export default class extends React.Component {
   handleRefresh() {
-    PlayersActions.fetch()
+    ApiActions.fetch()
   }
 
   render() {
